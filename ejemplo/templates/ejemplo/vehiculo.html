@@ -1,0 +1,20 @@
+{% extends 'ejemplo/base.html '%}
+
+{%block titulo %}
+Lista de vehiculos
+{% endblock %}
+{% block contenido%}
+    <a href= "/vehiculo/alta">Nuevo Mascota</a> 
+
+    </a>
+    <ul>
+    {% for vehiculo in lista_vehiculos %}    
+        <li> 
+            Id> {{vehiculo.id}}, Nombre: {{vehiculo.tipo}}, Marca : {{vehiculo.marca}}, pertenece a: {{titular}}
+             <a href="/vehiculo/actualizar/{{ vehiculo.titular }}">Actualizar</a>
+             <a href="/vehiculo/borrar/{{ vehiculo.titular}}">Borrar</a>
+
+        </li>
+            {% endfor %}
+         </ul>
+ {%endblock %}
