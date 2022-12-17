@@ -7,12 +7,12 @@ class Buscar(forms.Form):
                             widget= forms.TextInput(attrs ={'placeholder': 'Busque algo...'}))
 
 class Buscar_Mascota(forms.Form):
-    nombre_mascota = forms.CharField(max_length=100,
-                            widget= forms.TextInput(attrs ={'placeholder': '...'}))
+    nombre = forms.CharField(max_length=100,
+                            widget= forms.TextInput(attrs ={'placeholder': 'busqueda...'}))
 
 class Buscar_Vehiculo(forms.Form):
     titular = forms.CharField(max_length=100,
-                            widget= forms.TextInput(attrs ={'placeholder': '...'}))
+                            widget= forms.TextInput(attrs ={'placeholder': 'busqueda...'}))
 
 
 class FamiliarForm(forms.ModelForm):

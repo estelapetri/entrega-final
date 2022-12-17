@@ -2,8 +2,8 @@
 from django.shortcuts import render, get_object_or_404
 from ejemplo.models import Familiar, Mascota, Vehiculo
 from ejemplo.forms import Buscar, Buscar_Mascota, Buscar_Vehiculo
-from ejemplo.forms import FamiliarForm 
 from django.views import View 
+from ejemplo.forms import FamiliarForm 
 from ejemplo.forms import MascotaForm
 from ejemplo.forms import VehiculoForm
 
@@ -11,7 +11,7 @@ from ejemplo.forms import VehiculoForm
 #def index(request,nombre):
 #    return render(request, "ejemplo/saludar.html")
 
-def saludar_a(request,nombre):
+"""def saludar_a(request,nombre):
     return render(request, 
     "ejemplo/saludar_a.html",
     {"nombre": nombre}
@@ -24,9 +24,9 @@ def sumar(request, a, b):
     "b": b,
     "resultado": a + b
     }
-    )
+    )"""
 
-def buscar(request):
+"""def buscar(request):
     lista_de_nombre = ["German", "Daniel", "Romero", "Alvaro"]
     query = request.GET['q']
     if query in lista_de_nombre:
@@ -36,7 +36,7 @@ def buscar(request):
         resultado="No hay match"
     return render(request, 'ejemplo/buscar.html', {"resultado": resultado})
     
-
+"""
 
 def mostrar_familiares(request):
     lista_familiares = Familiar.objects.all()
@@ -119,13 +119,28 @@ class BorrarFamiliar(View):
         return render(request, self.template_name, {'lista_familiares': familiares})
 
 #********
+"""
+
+def mascotas(request):
+    lista_de_nombre = ["German", "Daniel", "Romero", "Alvaro"]
+    query = request.GET['q']
+    if query in lista_de_nombre:
+        indice_de_resultado = lista_de_nombre.index(query)
+        resultado= lista_de_nombre[indice_de_resultado]
+    else:
+        resultado="No hay match"
+    return render(request, 'ejemplo/buscar.html', {"resultado": resultado})
+#**************************
+"""
+
 def mostrar_mascota(request):
     lista_mascotas = Mascota.objects.all()
     return render(request, "ejemplo/mascotas.html", {"lista_mascotas": lista_mascotas})
 
+
 class BuscarMascota(View):
     form_class = Buscar_Mascota
-    template_name = 'ejemplo/mascota.html'
+    template_name = 'ejemplo/buscar_mascota.html'
     initial = {"nombre":""}
     def get(self, request):
         form = self.form_class(initial=self.initial)
@@ -190,23 +205,29 @@ class ActualizarMascota(View):
         return render(request, self.template_name, {"form": form})
 
 class BorrarMascota(View):
-    template_name = "ejemplo/mascota.html"
+    template_name = "ejemplo/mascotas.html"
     
   
     # prestar atención ahora el method get recibe un parametro pk == primaryKey == identificador único
     def get(self, request, pk): 
-        mascotaa = get_object_or_404(Mascota, pk=pk)
+        mascota = get_object_or_404(Mascota, pk=pk)
         mascota.delete()
         mascota= Mascota.objects.all()
-        return render(request, self.template_name, {'lista_mascota': mascota})
+        return render(request, self.template_name, {'lista_mascotas': mascota})
 
-    def mostrar_vehiculo(request):
-        lista_vehiculo = Vehiculo.objects.all()
-        return render(request, "ejemplo/vehiculo.html", {"lista_vehiculo": lista_vehiculo})
+
+
+####  comienza vehiculos
+
+
+
+def mostrar_vehiculo(request):
+    lista_vehiculo = Vehiculo.objects.all()
+    return render(request, "ejemplo/vehiculo.html", {"lista_vehiculo": lista_vehiculo})
 
 class BuscarVehiculo(View):
     form_class = Buscar_Vehiculo
-    template_name = 'ejemplo/vehiculo.html'
+    template_name = 'ejemplo/buscar_vehiculo.html'
     initial = {"nombre":""}
     def get(self, request):
         form = self.form_class(initial=self.initial)
@@ -268,12 +289,12 @@ class ActualizarVehiculo(View):
         return render(request, self.template_name, {"form": form})
 
 class BorrarVehiculo(View):
-    template_name = "ejemplo/vehiculo.html"
+    template_name = "ejemplo/borrar_vehiculo.html"
 
 
     # prestar atención ahora el method get recibe un parametro pk == primaryKey == identificador único
     def get(self, request, pk): 
         vehiculo = get_object_or_404(Vehiculo, pk=pk)
         vehiculo.delete()
-        vehiculo= Familiar.objects.all()
+        vehiculo= Vehiculo.objects.all()
         return render(request, self.template_name, {'lista_vehiculo': vehiculo})
