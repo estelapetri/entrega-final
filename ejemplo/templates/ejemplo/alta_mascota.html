@@ -2,12 +2,13 @@
 {% block titulo%} Alta de nueva Mascota {% endblock %}
 {% block contenido %}
   
-  <form action="/Mascota/alta" method="post">
+  <form action="/mascota/alta" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Guardar">
   </form>
 
   <h2 style="color:green">{{msg_exito}}</h2>
-  <a href="Mascota">Volver a la lista de Mascotas</a>
+ <a href="/mascota">Volver a la lista de Mascotas</a>
+
   {% endblock %}

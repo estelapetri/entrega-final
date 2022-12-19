@@ -4,17 +4,17 @@
 Lista de vehiculos
 {% endblock %}
 {% block contenido%}
-    <a href= "/vehiculo/alta">Nuevo Mascota</a> 
+    <a href= "/vehiculo/alta">Nuevo Vehiculo</a> 
 
     </a>
     <ul>
-    {% for vehiculo in lista_vehiculos %}    
+    {% for vehiculo in lista_vehiculo %}    
         <li> 
-            Id> {{vehiculo.id}}, Nombre: {{vehiculo.tipo}}, Marca : {{vehiculo.marca}}, pertenece a: {{titular}}
-             <a href="/vehiculo/actualizar/{{ vehiculo.titular }}">Actualizar</a>
-             <a href="/vehiculo/borrar/{{ vehiculo.titular}}">Borrar</a>
+            Id> {{vehiculo.id}}, Tipo: {{vehiculo.tipo}}, Marca : {{vehiculo.marca}}, pertenece a: {{vehiculo.titular}}
+             <a href="/vehiculo/actualizar/{{ vehiculo.id }}">Actualizar</a>
+             <a href="/vehiculo/borrar/{{ vehiculo.id}}">Borrar</a>
 
         </li>
-            {% endfor %}
-         </ul>
+        {% endfor %}
+    </ul>
  {%endblock %}

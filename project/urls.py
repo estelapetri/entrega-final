@@ -15,13 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ejemplo.views import (mostrar_familiares,
+from ejemplo.views import (mostrar_familiares,mostrar_mascota, mostrar_vehiculo,
                            BuscarFamiliar, AltaFamiliar,
                            ActualizarFamiliar, BorrarFamiliar,
                            AltaVehiculo,  BorrarVehiculo,
                            AltaMascota, ActualizarMascota, BorrarMascota,
-                           mostrar_mascota, mostrar_vehiculo,
-                           BuscarMascota,BuscarVehiculo) 
+                           BuscarMascota, BuscarVehiculo, ActualizarVehiculo) 
                         #ActualizarVehiculo,
                            
 #from blog.views import index as blog_index
@@ -37,18 +36,18 @@ urlpatterns = [
     path('mi-familia/actualizar/<int:pk>', ActualizarFamiliar.as_view()), # NUEVA RUTA PARA BUSCAR FAMILIAR
     path('mi-familia/borrar/<int:pk>', BorrarFamiliar.as_view()),
 
-    path('Mascota/', mostrar_mascota),
-    path('Mascota/buscar', BuscarMascota.as_view()),
-    path('Mascota/actualizar/<int:pk>', ActualizarMascota.as_view()),#as_view es un metodo de clase, transforma la clase en funcion
-    path('Mascota/alta', AltaMascota.as_view()),
-    path('Mascota/borrar/<int:pk>', BorrarMascota.as_view()),
+    path('mascota/', mostrar_mascota),
+    path('mascota/buscar', BuscarMascota.as_view()),
+    path('mascota/alta', AltaMascota.as_view()),
+    path('mascota/actualizar/<int:pk>', ActualizarMascota.as_view()),#as_view es un metodo de clase, transforma la clase en funcion
+    path('mascota/borrar/<int:pk>', BorrarMascota.as_view()),
     
 
 
     path('vehiculo/', mostrar_vehiculo),
-    path('Vehiculo/buscar', BuscarVehiculo.as_view()),
-    path('Vehiculo/actualizar/<int:pk>', ActualizarMascota.as_view()),#as_view es un metodo de clase, transforma la clase en funcion
-    path('Vehiculo/alta', AltaVehiculo.as_view()),
-    path('Vehiculo/borrar/<int:pk>', BorrarVehiculo.as_view()),
+    path('vehiculo/buscar', BuscarVehiculo.as_view()),
+    path('vehiculo/actualizar/<int:pk>', ActualizarVehiculo.as_view()),#as_view es un metodo de clase, transforma la clase en funcion
+    path('vehiculo/alta', AltaVehiculo.as_view()),
+    path('vehiculo/borrar/<int:pk>', BorrarVehiculo.as_view()),
    
 ]

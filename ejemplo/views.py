@@ -193,7 +193,7 @@ class ActualizarMascota(View):
     # prestar atención ahora el method post recibe un parametro pk == primaryKey == identificador único
     def post(self, request, pk): 
         mascota = get_object_or_404(Mascota, pk=pk)
-        form = self.form_class(request.POST ,instance=Mascota)
+        form = self.form_class(request.POST ,instance=mascota)
         if form.is_valid():
             form.save()
             msg_exito = f"se actualizó con éxito la mascota {form.cleaned_data.get('nombre')}"
@@ -228,15 +228,15 @@ def mostrar_vehiculo(request):
 class BuscarVehiculo(View):
     form_class = Buscar_Vehiculo
     template_name = 'ejemplo/buscar_vehiculo.html'
-    initial = {"nombre":""}
+    initial = {"titular":""}
     def get(self, request):
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {'form':form})
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            tipo = form.cleaned_data.get("tipo")
-            lista_vehiculo = Vehiculo.objects.filter(tipo__icontains= tipo).all() 
+            titular = form.cleaned_data.get("titular")
+            lista_vehiculo = Vehiculo.objects.filter(titular__icontains= titular).all() 
             form = self.form_class(initial=self.initial)
             return render(request, self.template_name, {'form':form, 
                                                         'lista_vehiculo':lista_vehiculo})
@@ -256,7 +256,7 @@ class AltaVehiculo(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            msg_exito = f"se cargo con éxito el Vehiculo {form.cleaned_data.get('tipo')}"
+            msg_exito = f"se cargo con éxito el Vehiculo {form.cleaned_data.get('titular')}"
             form = self.form_class(initial=self.initial)
             return render(request, self.template_name, {'form':form, 
                                                         'msg_exito': msg_exito})
@@ -289,7 +289,7 @@ class ActualizarVehiculo(View):
         return render(request, self.template_name, {"form": form})
 
 class BorrarVehiculo(View):
-    template_name = "ejemplo/borrar_vehiculo.html"
+    template_name = "ejemplo/vehiculo.html"
 
 
     # prestar atención ahora el method get recibe un parametro pk == primaryKey == identificador único
