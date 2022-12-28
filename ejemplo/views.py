@@ -6,41 +6,13 @@ from django.views import View
 from ejemplo.forms import FamiliarForm 
 from ejemplo.forms import MascotaForm
 from ejemplo.forms import VehiculoForm
+from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
-
-#def index(request,nombre):
-#    return render(request, "ejemplo/saludar.html")
-
-"""def saludar_a(request,nombre):
-    return render(request, 
-    "ejemplo/saludar_a.html",
-    {"nombre": nombre}
-    )
-
-def sumar(request, a, b):
-    return render(request, 
-    "ejemplo/sumar.html",
-    {"a": a,
-    "b": b,
-    "resultado": a + b
-    }
-    )"""
-
-"""def buscar(request):
-    lista_de_nombre = ["German", "Daniel", "Romero", "Alvaro"]
-    query = request.GET['q']
-    if query in lista_de_nombre:
-        indice_de_resultado = lista_de_nombre.index(query)
-        resultado= lista_de_nombre[indice_de_resultado]
-    else:
-        resultado="No hay match"
-    return render(request, 'ejemplo/buscar.html', {"resultado": resultado})
-    
-"""
 
 def mostrar_familiares(request):
     lista_familiares = Familiar.objects.all()
     return render(request, "ejemplo/familiares.html", {"lista_familiares": lista_familiares})
+
 
 class BuscarFamiliar(View):
     form_class = Buscar
@@ -119,20 +91,29 @@ class BorrarFamiliar(View):
         return render(request, self.template_name, {'lista_familiares': familiares})
 
 #********
-"""
 
-def mascotas(request):
-    lista_de_nombre = ["German", "Daniel", "Romero", "Alvaro"]
-    query = request.GET['q']
-    if query in lista_de_nombre:
-        indice_de_resultado = lista_de_nombre.index(query)
-        resultado= lista_de_nombre[indice_de_resultado]
-    else:
-        resultado="No hay match"
-    return render(request, 'ejemplo/buscar.html', {"resultado": resultado})
-#**************************
-"""
+class FamiliarDetalle(DetailView):
+  model = Familiar
 
+class FamiliarList(ListView):
+  model = Familiar
+
+class FamiliarCrear(CreateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
+
+class FamiliarBorrar(DeleteView):
+  model = Familiar
+  success_url = "/panel-familia"
+
+class FamiliarActualizar(UpdateView):
+  model = Familiar
+  success_url = "/suceso_de_actualizacion"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
+
+
+#-------------MASCOTAS
 def mostrar_mascota(request):
     lista_mascotas = Mascota.objects.all()
     return render(request, "ejemplo/mascotas.html", {"lista_mascotas": lista_mascotas})
