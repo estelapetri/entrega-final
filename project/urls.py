@@ -1,4 +1,5 @@
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView 
@@ -12,7 +13,8 @@ from ejemplo.views import (mostrar_familiares,mostrar_mascota, mostrar_vehiculo,
 #from vyj.views import index, PostListar, PostCrear
 from vyj.views import (index, PostDetalle, PostListar,
                       PostCrear, PostBorrar, PostActualizar,
-                      UserSignUp, UserLogin, UserLogout)
+                      UserSignUp, UserLogin, UserLogout,
+                      AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
 
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -52,13 +54,21 @@ urlpatterns = [
 
     path('success_updated_message/',TemplateView.as_view(template_name="vyj_updated_message.html")),
     path('vyj/', index, name="vyj-index"),
-    path('vyj/', PostListar.as_view(), name="vuj-listar"),
+    path('vyj/', PostListar.as_view(), name="vyj-listar"),
     path('vyj/<int:pk>/detalle/', PostDetalle.as_view(), name="vyj-detalle"),
     path('vyj/listar/', PostListar.as_view(), name="vyj-listar"),
     path('vyj/crear/', PostCrear.as_view(), name="vyj-crear"),
     path('vyj/<int:pk>/borrar/',staff_member_required(PostBorrar.as_view()), name="vyj-borrar"),
-    path('vyj/<int:pk>/actualizar/', staff_member_required(PostActualizar.as_view()), name="vyj-actualizar"),
+    #estaba la linea 66
     path('vyj/signup/',UserSignUp.as_view(), name="vyj-signup"),
     path('vyj/login/',UserLogin.as_view(), name="vyj-login"),
     path('vyj/logout/',UserLogout.as_view(), name="vyj-logout"),
+    path('vyj/<int:pk>/actualizar/', staff_member_required(PostActualizar.as_view()), name="vyj-actualizar"),# lo cambien de lugar
+    path('vyj/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="vyj-avatars-actualizar"),
+    path('vyj/user/<int:pk>/actualizar/', UserActualizar.as_view(), name="vyj-user-actualizar"),
+    path('vyj/mensajes/crear/', MensajeCrear.as_view(), name="vyj-mensajes-crear"),
+    path('vyj/mensajes/<int:pk>/detalle', MensajeDetalle.as_view(), name="vyj-mensajes-detalle"),
+    path('vyj/mensajes/listar', MensajeListar.as_view(), name="vyj-mensajes-listar"),
+
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

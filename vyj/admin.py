@@ -1,3 +1,4 @@
 from django.contrib import admin
+from vyj.models import Avatar
 
-# Register your models here.
+admin.site.register(Avatar)

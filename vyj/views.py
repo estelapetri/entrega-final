@@ -6,25 +6,25 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from vyj.forms import UsuarioForm
+from vyj.models import Avatar, Post, Mensaje
+from django.contrib.auth.admin import User
 
 #@login_required
 def index(request):
-    return render(request, "vyj/index.html",{})
+    posts = Post.objects.order_by('-publicado_el').all()
+    return render(request, "vyj/index.html",{posts})
 
 class PostDetalle(DetailView):
     model = Post
 
-
+class PostListar(ListView):
+    model = Post
+  
 class PostCrear(LoginRequiredMixin, CreateView):
     model = Post
     success_url = reverse_lazy("vyj-listar") # reverse lazy
     #success_url = "/vyj/listar"
     fields =  '__all__'
-
-class PostListar(ListView):
-    model = Post
-  
-
 
 class PostBorrar(LoginRequiredMixin, DeleteView):
     model = Post
@@ -45,4 +45,31 @@ class UserLogin(LoginView):
 
 class UserLogout(LogoutView):
     next_page = reverse_lazy('vyj-listar')
+
+
+class AvatarActualizar(UpdateView):
+    model = Avatar
+    fields = ['imagen']
+    success_url =  reverse_lazy('vyj-listar')
+
+class UserActualizar(UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'email']
+    success_url = reverse_lazy('vyj-listar')
+
+
+class MensajeDetalle(LoginRequiredMixin, DetailView):
+    model = Mensaje
+
+class MensajeListar(LoginRequiredMixin, ListView):
+    model = Mensaje  
+
+class MensajeCrear(CreateView):
+    model = Mensaje
+    success_url = reverse_lazy("vyj-mensajes-crear")
+    fields = ['nombre', 'email', 'texto']
+
+class MensajeBorrar(LoginRequiredMixin, DeleteView):
+    model = Mensaje
+    success_url = reverse_lazy("vyj-mensajes-listar")
     

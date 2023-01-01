@@ -1,10 +1,15 @@
 {% extends 'vyj/base.html' %}
 
 {% block contenido %}
-{% if user.is_authenticated %}
-    <a href=" {% url 'vyj-crear' %}">Crear Post</a>
-{% endif %}
 
+
+{% if user.is_authenticated %}
+    <a href="{% url 'vyj-crear' %}"> Crear Post</a>
+    <a href="{% url 'vyj-avatars-actualizar' user.id %}">Actualizar Avatar</a>
+    <a href="{% url 'vyj-user-actualizar' user.id %}">Actualizar Profile</a>
+    <a href="{% url 'vyj-mensajes-listar' user.id %}">Mensajes</a>
+    
+{% endif %}
 <ul>
 {% for post in object_list %}
     <li>
@@ -12,6 +17,7 @@
         {% if user.is_authenticated %}
             <a href="{% url 'vyj-borrar' post.id %}">Borrar </a>
             <a href=" {% url 'vyj-actualizar' post.id %}">Actualizar</a>
+            
         {% endif%}
         <a href=" {% url 'vyj-detalle' post.id %}">Ver</a>
 
