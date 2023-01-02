@@ -18,7 +18,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{% url 'vyj-index' %}">                  
                     <img src="{{user.avatar.imagen.url}}" height="64"> 
-                    {% if user.is_authenticated %}
+                    {% if user.is_authenticateduser.avatar.imagen %}
                      Hola, {{user.first_name}} 
                     {% endif %}              
                     Start Bootstrap

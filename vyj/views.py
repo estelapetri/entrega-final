@@ -12,8 +12,7 @@ from django.contrib.auth.admin import User
 #@login_required
 def index(request):
     posts = Post.objects.order_by('-publicado_el').all()
-    return render(request, "vyj/index.html",{posts})
-
+    return render(request, "vyj/index.html", {"posts": posts})
 class PostDetalle(DetailView):
     model = Post
 
