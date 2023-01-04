@@ -6,9 +6,9 @@
 {% if user.is_authenticated %}
     <a href="{% url 'vyj-crear' %}"> Crear Post</a>
     {% if user.avatar.imagen %}
-        <a href="{% url 'vyj-avatars-actualizar' user.id %}">Actualizar Avatar</a>
+        <a href="{% url 'vyj-avatars-actualizar' user.avatar.id %}"> Actualizar Avatar</a>
     {% endif %}
-        <a href="{% url 'vyj-user-actualizar' user.id %}">Actualizar Profile</a>
+        <a href="{% url 'vyj-user-actualizar' user.id %}"> Actualizar Profile</a>
     <a href="{% url 'vyj-mensajes-listar' %}">Mensajes</a>
     
 {% endif %}

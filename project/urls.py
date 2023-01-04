@@ -8,13 +8,16 @@ from ejemplo.views import (mostrar_familiares,mostrar_mascota, mostrar_vehiculo,
                            ActualizarFamiliar, BorrarFamiliar,
                            AltaVehiculo,  BorrarVehiculo,
                            AltaMascota, ActualizarMascota, BorrarMascota,
-                           BuscarMascota, BuscarVehiculo, ActualizarVehiculo) 
+                           BuscarMascota, BuscarVehiculo, ActualizarVehiculo)
+                          
 
 #from vyj.views import index, PostListar, PostCrear
 from vyj.views import (index, PostDetalle, PostListar,
                       PostCrear, PostBorrar, PostActualizar,
                       UserSignUp, UserLogin, UserLogout,
-                      AvatarActualizar, UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
+                      AvatarActualizar, UserActualizar, MensajeCrear,
+                      MensajeListar, MensajeDetalle, MensajeBorrar,
+                      About)
 
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -69,6 +72,10 @@ urlpatterns = [
     path('vyj/mensajes/crear/', MensajeCrear.as_view(), name="vyj-mensajes-crear"),
     path('vyj/mensajes/<int:pk>/detalle', MensajeDetalle.as_view(), name="vyj-mensajes-detalle"),
     path('vyj/mensajes/listar', MensajeListar.as_view(), name="vyj-mensajes-listar"),
+    path('vyj/mensajes/<int:pk>/borrar', staff_member_required(MensajeBorrar.as_view()), name='vyj-mensajes-borrar'),
+    path('vyj/about/', About, name="vyj-about")
+
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

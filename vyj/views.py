@@ -13,6 +13,10 @@ from django.contrib.auth.admin import User
 def index(request):
     posts = Post.objects.order_by('-publicado_el').all()
     return render(request, "vyj/index.html", {"posts": posts})
+
+def About(request):
+    return render(request, 'vyj/about.html')
+
 class PostDetalle(DetailView):
     model = Post
 
@@ -65,10 +69,11 @@ class MensajeListar(LoginRequiredMixin, ListView):
 
 class MensajeCrear(CreateView):
     model = Mensaje
-    success_url = reverse_lazy("vyj-mensajes-crear")
+    success_url = reverse_lazy("vyj-mensajes-listar")
     fields = ['nombre', 'email', 'texto']
 
 class MensajeBorrar(LoginRequiredMixin, DeleteView):
     model = Mensaje
     success_url = reverse_lazy("vyj-mensajes-listar")
     
+

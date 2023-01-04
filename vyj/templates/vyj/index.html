@@ -59,6 +59,8 @@
                             </div>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="col-lg-6">   
                         <!-- Blog post-->
                         <div class="card mb-4">
                             {% if posts.4 %}
@@ -71,17 +73,23 @@
                             </div>
                             {% endif %}
                         </div>
-                        <div class="card mb-4">
-                            {% if posts.5 %}
-                            <a href="#!"><img class="card-img-top" src="{{posts.5.imagen.url}}" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">{{posts.5.publicado_el}}</div>
-                                <h2 class="card-title">{{posts.5.titulo}}</h2>
-                                <p class="card-text">{{posts.5.sub_titulo}}</p>
-                                <a class="btn btn-primary" href="{% url 'vyj-detalle' posts.5.id %}">Leer Mas →</a>
+                    </div>
+                        <!-- Nested row for non-featured blog posts-->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <!-- Blog post-->
+                                <div class="card mb-4">
+                                    {% if posts.5 %}
+                                    <a href="#!"><img class="card-img-top" src="{{posts.1.imagen.url}}" alt="..." /></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">{{posts.5.publicado_el}}</div>
+                                        <h2 class="card-title">{{posts.5.titulo}}</h2>
+                                        <p class="card-text">{{posts.5.sub_titulo}}</p>
+                                        <a class="btn btn-primary" href="{% url 'vyj-detalle' posts.5.id %}">Leer Mas →</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
-                            {% endif %}
-                        </div>
                     </div>
                 </div>
             {% else %}
