@@ -60,7 +60,7 @@ urlpatterns = [
     path('vyj/', PostListar.as_view(), name="vyj-listar"),
     path('vyj/<int:pk>/detalle/', PostDetalle.as_view(), name="vyj-detalle"),
     path('vyj/listar/', PostListar.as_view(), name="vyj-listar"),
-    path('vyj/crear/', PostCrear.as_view(), name="vyj-crear"),
+    path('vyj/crear/',staff_member_required(PostCrear.as_view()), name="vyj-crear"),
     path('vyj/<int:pk>/borrar/',staff_member_required(PostBorrar.as_view()), name="vyj-borrar"),
     #estaba la linea 66
     path('vyj/signup/',UserSignUp.as_view(), name="vyj-signup"),
@@ -73,7 +73,7 @@ urlpatterns = [
     path('vyj/mensajes/<int:pk>/detalle', MensajeDetalle.as_view(), name="vyj-mensajes-detalle"),
     path('vyj/mensajes/listar', MensajeListar.as_view(), name="vyj-mensajes-listar"),
     path('vyj/mensajes/<int:pk>/borrar', staff_member_required(MensajeBorrar.as_view()), name='vyj-mensajes-borrar'),
-    path('vyj/about/', About, name="vyj-about")
+    path('vyj/about/', About, name="about")
 
 
 

@@ -15,7 +15,9 @@ def index(request):
     return render(request, "vyj/index.html", {"posts": posts})
 
 def About(request):
-    return render(request, 'vyj/about.html')
+    return render(request, "vyj/about.html")
+
+
 
 class PostDetalle(DetailView):
     model = Post
